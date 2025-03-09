@@ -1,19 +1,26 @@
 plugins {
-    id("java")
+    id("java-library")
+    id("org.springframework.boot") version Versions.SPRING_BOOT_FRAMEWORK
+    id("io.spring.dependency-management") version Versions.SPRING_DEPENDENCY_MANAGEMENT
 }
 
-group = "io.lithium"
-version = "1.0-SNAPSHOT"
+subprojects {
+    apply(plugin = "java-library")
+    apply(plugin = "org.springframework.boot")
+    apply(plugin = "io.spring.dependency-management")
 
-repositories {
-    mavenCentral()
-}
+    group = "io.lithium.client"
+    version = "0.0.1-ALPHA"
 
-dependencies {
-    testImplementation(platform("org.junit:junit-bom:5.10.0"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
-}
+    repositories {
+        mavenCentral()
+    }
 
-tasks.test {
-    useJUnitPlatform()
+    dependencies { // Common Dependencies for all Subprojects
+        compileOnly("org.projectlombok:lombok")
+        annotationProcessor("org.projectlombok:lombok")
+
+        testImplementation("org.springframework.boot:spring-boot-starter-test")
+        testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    }
 }
