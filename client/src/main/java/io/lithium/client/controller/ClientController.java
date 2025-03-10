@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1/clients")
+@RequestMapping
 public class ClientController {
 
     @GetMapping

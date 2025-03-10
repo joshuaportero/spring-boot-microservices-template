@@ -10,6 +10,8 @@ spring:
                   uri: lb://CLIENT
                   predicates:
                       - Path=/api/v1/clients/**
+                  filters:
+                      - RewritePath=/api/v1/clients/?(?<segment>.*), /${segment}
 eureka:
     client:
         service-url:
